@@ -154,7 +154,7 @@ class JudgeQuestion extends CourseQuestion {
     public Fill(answer: Answer): Promise<TopicStatus> {
         return new Promise<TopicStatus>(async resolve => {
             let el: HTMLElement;
-            if (answer.correct[0].content) {
+            if (answer.correct[0].content=="True") {
                 el = this.el.querySelector(".u-tbl.f-pr.f-cb .u-icon-correct").parentElement.parentElement;
             } else {
                 el = this.el.querySelector(".u-tbl.f-pr.f-cb .u-icon-wrong").parentElement.parentElement;

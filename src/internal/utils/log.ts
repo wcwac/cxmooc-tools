@@ -113,20 +113,20 @@ export class PageLog implements Logger {
                 self.is_notify = this.checked;
                 Application.App.config.SetConfig("is_notify", this.checked.toString());
             });
-            setTimeout(() => {
-                Application.CheckUpdate((isnew, data) => {
-                    if (data == undefined) {
-                        this.Info("检查更新失败.")
-                        return;
-                    }
-                    let html = "";
-                    if (isnew) {
-                        html += "<span>[有新版本]</span>"
-                    }
-                    html += data.injection;
-                    this.Info(html);
-                });
-            }, 1000);
+            // setTimeout(() => {
+            //     Application.CheckUpdate((isnew, data) => {
+            //         if (data == undefined) {
+            //             this.Info("检查更新失败.")
+            //             return;
+            //         }
+            //         let html = "";
+            //         if (isnew) {
+            //             html += "<span>[有新版本]</span>"
+            //         }
+            //         html += data.injection;
+            //         this.Info(html);
+            //     });
+            // }, 1000);
             //支持拖拽移动
             this.div.style.left = Application.App.config.GetConfig("notify_tools_x");
             this.div.style.top = Application.App.config.GetConfig("notify_tools_y");
