@@ -38,9 +38,9 @@ class background implements Launcher {
         });
         this.update();
         //1小时检查更新
-        setInterval(() => {
-            this.update();
-        }, 60 * 60 * 1000);
+        // setInterval(() => {
+        //     this.update();
+        // }, 60 * 60 * 1000);
         this.injectedScript();
         this.event();
         this.menu();

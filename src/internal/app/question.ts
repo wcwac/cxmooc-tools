@@ -211,7 +211,7 @@ export class ToolsQuestionBank implements QuestionBank {
                 },
                 json: true,
                 success: (result: any) => {
-                    Application.App.log.Info("答案自动记录成功,成功获得" + result.add_token_num + "个打码数,剩余数量:" + result.token_num);
+                    Application.App.log.Info("答案自动记录成功,题库新增加" + result.add_token_num + "道题目,题库总题数:" + result.token_num);
                     resolve("success");
                 },
                 error: () => {

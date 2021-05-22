@@ -22,12 +22,12 @@ export class Course163 implements Mooc {
                     clearInterval(this.delayTimer);
                     this.lastTask && await this.lastTask.Stop();
                     this.lastTask = task;
-                    this.lastTask.addEventListener("complete", () => {
-                        this.delay(async () => {
-                            await this.lastTask.Submit();
-                            this.nextTask();
-                        });
-                    });
+                    // this.lastTask.addEventListener("complete", () => {
+                    //     this.delay(async () => {
+                    //         await this.lastTask.Submit();
+                    //         this.nextTask();
+                    //     });
+                    // });
                     await this.lastTask.Init();
                     if (Application.App.config.auto) {
                         let autonext = <HTMLInputElement>document.querySelector(".j-autoNext");
