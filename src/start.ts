@@ -44,15 +44,15 @@ class start implements Launcher {
             }
         });
         //检查扩展强制更新
-        Application.CheckUpdate((isnew, data) => {
-            if (isnew) {
-                if (data.enforce) {
-                    alert('刷课扩展要求强制更新');
-                    window.open(data.url);
-                    return;
-                }
-            }
-        });
+        // Application.CheckUpdate((isnew, data) => {
+        //     if (isnew) {
+        //         if (data.enforce) {
+        //             alert('刷课扩展要求强制更新');
+        //             window.open(data.url);
+        //             return;
+        //         }
+        //     }
+        // });
     }
 }
 

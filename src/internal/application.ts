@@ -91,30 +91,30 @@ export class Application {
         return NewExtensionClientMessage(AppName);
     }
 
-    public static CheckUpdate(callback: (isnew: boolean, data: UpdateData) => void) {
-        if (Application.IsContent) {
-            chrome.storage.local.get(["version", "enforce", "hotversion", "url"], async function (item) {
-                await callback((SystemConfig.version < item.version), item as UpdateData);
-            });
-            return;
-        }
-        HttpUtils.HttpGet(SystemConfig.url + "update?ver=" + SystemConfig.version, {
-            json: true,
-            success: async function (json) {
-                let data: UpdateData = {
-                    version: json.version,
-                    url: json.url,
-                    enforce: json.enforce,
-                    hotversion: json.hotversion,
-                    injection: json.injection,
-                };
-                chrome.storage && chrome.storage.local.set(data);
-                await callback((SystemConfig.version < data.version), data);
-            }, error: async function () {
-                await callback(false, undefined);
-            }
-        });
-    }
+    // public static CheckUpdate(callback: (isnew: boolean, data: UpdateData) => void) {
+    //     if (Application.IsContent) {
+    //         chrome.storage.local.get(["version", "enforce", "hotversion", "url"], async function (item) {
+    //             await callback((SystemConfig.version < item.version), item as UpdateData);
+    //         });
+    //         return;
+    //     }
+    //     HttpUtils.HttpGet(SystemConfig.url + "update?ver=" + SystemConfig.version, {
+    //         json: true,
+    //         success: async function (json) {
+    //             let data: UpdateData = {
+    //                 version: json.version,
+    //                 url: json.url,
+    //                 enforce: json.enforce,
+    //                 hotversion: json.hotversion,
+    //                 injection: json.injection,
+    //             };
+    //             chrome.storage && chrome.storage.local.set(data);
+    //             await callback((SystemConfig.version < data.version), data);
+    //         }, error: async function () {
+    //             await callback(false, undefined);
+    //         }
+    //     });
+    // }
 }
 
 export interface UpdateData {

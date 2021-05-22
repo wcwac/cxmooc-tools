@@ -70,54 +70,58 @@ class background implements Launcher {
     }
 
     protected update() {
-        Application.CheckUpdate((isnew, data) => {
-            let sourceUrl = chrome.extension.getURL('src/mooc.js');
-            let version = SystemConfig.version;
-            if (isnew) {
-                chrome.browserAction.setBadgeText({
-                    text: 'new'
-                });
-                chrome.browserAction.setBadgeBackgroundColor({
-                    color: [255, 0, 0, 255]
-                });
-            }
-            if (data == undefined) {
-                if (this.source) {
-                    return;
-                }
-                get(chrome.extension.getURL('src/mooc.js'), (source: string) => {
-                    version = SystemConfig.version;
-                    this.source = this.dealScript(source, SystemConfig.version);
-                });
-                return;
-            }
-            if (this.lastHotVersion == data.hotversion) {
-                return;
-            }
-            this.lastHotVersion = data.hotversion;
-            //缓存js文件源码
-            let hotVersion = dealHotVersion(data.hotversion);
-            let isHotUpdate: boolean = false;
-            if (hotVersion > SystemConfig.version) {
-                Application.App.log.Info("使用热更新版本:" + hotVersion);
-                isHotUpdate = true;
-            }
-            if (isHotUpdate) {
-                sourceUrl = SystemConfig.url + 'js/' + hotVersion + '.js';
-                version = hotVersion;
-            }
-            (<any>get(sourceUrl, (source: string) => {
-                this.source = this.dealScript(source, version);
-            })).error(() => {
-                if (this.source) {
-                    return;
-                }
-                get(chrome.extension.getURL('src/mooc.js'), (source: string) => {
-                    version = SystemConfig.version;
-                    this.source = this.dealScript(source, SystemConfig.version);
-                });
-            });
+        get(chrome.extension.getURL('src/mooc.js'), (source: string) => {
+            this.source = this.dealScript(source, SystemConfig.version);
         });
+        return;
+    //     Application.CheckUpdate((isnew, data) => {
+    //         let sourceUrl = chrome.extension.getURL('src/mooc.js');
+    //         let version = SystemConfig.version;
+    //         if (isnew) {
+    //             chrome.browserAction.setBadgeText({
+    //                 text: 'new'
+    //             });
+    //             chrome.browserAction.setBadgeBackgroundColor({
+    //                 color: [255, 0, 0, 255]
+    //             });
+    //         }
+    //         if (data == undefined) {
+    //             if (this.source) {
+    //                 return;
+    //             }
+    //             get(chrome.extension.getURL('src/mooc.js'), (source: string) => {
+    //                 version = SystemConfig.version;
+    //                 this.source = this.dealScript(source, SystemConfig.version);
+    //             });
+    //             return;
+    //         }
+    //         if (this.lastHotVersion == data.hotversion) {
+    //             return;
+    //         }
+    //         this.lastHotVersion = data.hotversion;
+    //         //缓存js文件源码
+    //         let hotVersion = dealHotVersion(data.hotversion);
+    //         let isHotUpdate: boolean = false;
+    //         if (hotVersion > SystemConfig.version) {
+    //             Application.App.log.Info("使用热更新版本:" + hotVersion);
+    //             isHotUpdate = true;
+    //         }
+    //         if (isHotUpdate) {
+    //             sourceUrl = SystemConfig.url + 'js/' + hotVersion + '.js';
+    //             version = hotVersion;
+    //         }
+    //         (<any>get(sourceUrl, (source: string) => {
+    //             this.source = this.dealScript(source, version);
+    //         })).error(() => {
+    //             if (this.source) {
+    //                 return;
+    //             }
+    //             get(chrome.extension.getURL('src/mooc.js'), (source: string) => {
+    //                 version = SystemConfig.version;
+    //                 this.source = this.dealScript(source, SystemConfig.version);
+    //             });
+    //         });
+    //     });
     }
 
     protected dealScript(source: string, version: any): string {

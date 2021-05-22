@@ -77,23 +77,23 @@ class popup implements Launcher {
         }
         vtoken.value = Application.App.config.GetConfig("vtoken");
 
-        Application.CheckUpdate(function (isnew, data) {
-            let v: any;
-            if (data === undefined) {
-                (<HTMLImageElement>document.getElementById("tiku")).src = "./../img/error.svg";
-                v = SystemConfig.version + ".0";
-            } else {
-                if (isnew) {
-                    var p = document.createElement('p');
-                    p.style.color = "#ff0000";
-                    p.innerHTML = '有新的版本更新:<a href="' + data.url + '" style="float:right;" target="_blank">点我去下载</a>  最新版本:v' + data.version;
-                    document.getElementsByTagName('body')[0].appendChild(p);
-                }
-                document.getElementById("injection").innerHTML = data.injection;
-                v = (SystemConfig.version >= dealHotVersion(data.hotversion) ? SystemConfig.version + ".0" : data.hotversion);
-            }
-            document.getElementById('version').innerHTML = 'v' + v + (Application.App.debug ? " debug" : "");
-        });
+        // Application.CheckUpdate(function (isnew, data) {
+        //     let v: any;
+        //     if (data === undefined) {
+        //         (<HTMLImageElement>document.getElementById("tiku")).src = "./../img/error.svg";
+        //         v = SystemConfig.version + ".0";
+        //     } else {
+        //         if (isnew) {
+        //             var p = document.createElement('p');
+        //             p.style.color = "#ff0000";
+        //             p.innerHTML = '有新的版本更新:<a href="' + data.url + '" style="float:right;" target="_blank">点我去下载</a>  最新版本:v' + data.version;
+        //             document.getElementsByTagName('body')[0].appendChild(p);
+        //         }
+        //         document.getElementById("injection").innerHTML = data.injection;
+        //         v = (SystemConfig.version >= dealHotVersion(data.hotversion) ? SystemConfig.version + ".0" : data.hotversion);
+        //     }
+        //     document.getElementById('version').innerHTML = 'v' + v + (Application.App.debug ? " debug" : "");
+        // });
     }
 
 }
